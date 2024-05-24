@@ -41,6 +41,7 @@ dependencies {
 
     /** HILT */
     implementation "com.google.dagger:hilt-android:$hiltVersion"
+    implementation project(':library')
     kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
     implementation "androidx.hilt:hilt-navigation-compose:1.0.0" // hiltViewModel
 
@@ -57,4 +58,7 @@ dependencies {
     implementation "androidx.navigation:navigation-compose"
 
     implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
+
+    implementation 'com.github.sarang628:CommonImageLoader:3172041579'
+    implementation 'com.github.sarang628:ImagePager:de9cbcccc8'
 }
