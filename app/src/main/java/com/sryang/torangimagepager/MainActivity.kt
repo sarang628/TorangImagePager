@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.sryang.imagepager.ImagePager
+import com.sryang.imagepager.provideImagePager
 import com.sryang.library.ImagePagerWithContents
 import com.sryang.torangimagepager.ui.theme.TorangImagePagerTheme
 
@@ -74,18 +75,12 @@ fun ImagePagerWithContentsTest() {
         onContents = {},
         onLike = {},
         onComment = {},
-        imagePager = { list, position, onPage, backgroundColor ->
-            ImagePager(
-                list = list,
-                position = position ?: 0,
-                onPage = onPage,
-                backgroundColor = backgroundColor ?: Color.Black,
-                image = { url ->
-                    ZoomableTorangAsyncImage(
-                        model = url,
-                        modifier = Modifier.fillMaxSize()
-                    )
-                })
+        imagePager = provideImagePager(),
+        image = { url ->
+            ZoomableTorangAsyncImage(
+                model = url,
+                modifier = Modifier.fillMaxSize()
+            )
         }
     )
 }

@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
+
 @Composable
 fun ImagePagerWithContents(
     list: List<String>,
@@ -45,7 +46,9 @@ fun ImagePagerWithContents(
         position: Int?,
         onPage: ((Int) -> Unit)?,
         backgroundColor: Color?,
+        image: @Composable (String) -> Unit,
     ) -> Unit,
+    image: @Composable (String) -> Unit,
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -67,7 +70,7 @@ fun ImagePagerWithContents(
             ) {
 
 
-                imagePager.invoke(list, position, null, null)
+                imagePager.invoke(list, position, null, null, image)
 
                 Column(
                     modifier = Modifier
@@ -174,7 +177,8 @@ fun PreviewImagePagerWithContents() {
         onContents = {},
         onLike = {},
         onComment = {},
-        imagePager = { _, _, _, _ ->
-        }
+        imagePager = { _, _, _, _, _ ->
+        },
+        image = {}
     )
 }
