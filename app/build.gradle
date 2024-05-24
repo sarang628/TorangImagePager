@@ -7,18 +7,13 @@ plugins {
 }
 
 android {
-    namespace 'com.sryang.torangimagepager'
-    compileSdk 34
+    compileSdk rootProject.compileSdk
 
     defaultConfig {
-        applicationId "com.sryang.torangimagepager"
+        applicationId "com.sarang.torang"
         minSdk rootProject.minSdk
         targetSdk rootProject.targetSdk
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary true
-        }
     }
 
     buildTypes {
@@ -38,6 +33,8 @@ android {
         targetCompatibility JavaVersion.VERSION_17
         sourceCompatibility JavaVersion.VERSION_17
     }
+
+    namespace 'com.sryang.torangimagepager'
 }
 
 dependencies {
