@@ -1,0 +1,3 @@
+[submodule "app/src/main/java/com/sryang/torangimagepager/di/repository"]
+	path = app/src/main/java/com/sryang/torangimagepager/di/repository
+	url = https://github.com/sarang628/repository.git

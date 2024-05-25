@@ -1,4 +1,4 @@
-package com.sryang.library
+package com.sryang.library.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
+import com.sryang.library.R
 
 @Composable
 fun ImagePagerWithContents(
@@ -41,6 +42,7 @@ fun ImagePagerWithContents(
     onContents: (() -> Unit)? = null,
     onLike: (() -> Unit)? = null,
     onComment: (() -> Unit)? = null,
+    onPage: ((Int) -> Unit)? = null,
     imagePager: @Composable (
         list: List<String>,
         position: Int?,
@@ -70,7 +72,7 @@ fun ImagePagerWithContents(
             ) {
 
 
-                imagePager.invoke(list, position, null, null, image)
+                imagePager.invoke(list, position, onPage, null, image)
 
                 Column(
                     modifier = Modifier

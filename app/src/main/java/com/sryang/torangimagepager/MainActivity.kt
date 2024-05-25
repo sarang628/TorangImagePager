@@ -2,28 +2,114 @@ package com.sryang.torangimagepager
 
 import ZoomableTorangAsyncImage
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.InputChip
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.sryang.imagepager.ImagePager
+import androidx.compose.ui.unit.dp
+import com.sarang.torang.repository.FeedRepository
+import com.sarang.torang.repository.FeedRepositoryTest
+import com.sarang.torang.repository.LoginRepository
+import com.sarang.torang.repository.LoginRepositoryTest
 import com.sryang.imagepager.provideImagePager
-import com.sryang.library.ImagePagerWithContents
+import com.sryang.library.ui.component.ImagePagerWithContents
+import com.sryang.library.provideRestaurantImagePager
+import com.sryang.library.provideReviewImagePager
 import com.sryang.torangimagepager.ui.theme.TorangImagePagerTheme
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var loginRepository: LoginRepository
+
+    @Inject
+    lateinit var feedRepository: FeedRepository
+
+    @OptIn(ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            var reviewId by remember { mutableStateOf("0") }
+            var imageId by remember { mutableStateOf("0") }
             TorangImagePagerTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    ImagePagerWithContentsTest()
+
+                    Column(
+                        modifier = Modifier
+                            .padding(innerPadding)
+                            .verticalScroll(rememberScrollState())
+                    )
+                    {
+
+                        //ImagePagerWithContentsTest()
+                        InputChip(selected = true, onClick = { }, label = {
+                            Text(text = "reviewId:")
+                            BasicTextField(value = reviewId, onValueChange = {
+                                try {
+                                    reviewId = it
+                                } catch (e: Exception) {
+                                    Log.e("__MainActivity", "Wrong input : ${it}")
+                                }
+                            })
+                        })
+
+                        InputChip(selected = true, onClick = { }, label = {
+                            Text(text = "imageId:")
+                            BasicTextField(value = imageId, onValueChange = {
+                                try {
+                                    imageId = it
+                                } catch (e: Exception) {
+                                    Log.e("__MainActivity", "Wrong input : ${it}")
+                                }
+                            })
+                        })
+
+                        Box(modifier = Modifier.size(600.dp)) {
+                            provideReviewImagePager(
+                                image = { url ->
+                                    ZoomableTorangAsyncImage(
+                                        model = url,
+                                        modifier = Modifier.fillMaxSize()
+                                    )
+                                },
+                                imagePager = provideImagePager()
+                            ).invoke(reviewId.toInt(), 0)
+                        }
+                        Box(modifier = Modifier.size(600.dp)) {
+                            provideRestaurantImagePager(
+                                image = { url ->
+                                    ZoomableTorangAsyncImage(
+                                        model = url,
+                                        modifier = Modifier.fillMaxSize()
+                                    )
+                                },
+                                imagePager = provideImagePager()
+                            ).invoke(reviewId.toInt())
+                        }
+                        LoginRepositoryTest(loginRepository = loginRepository)
+                        FeedRepositoryTest(feedRepository = feedRepository)
+                    }
                 }
             }
         }
