@@ -93,7 +93,13 @@ class MainActivity : ComponentActivity() {
                                         modifier = Modifier.fillMaxSize()
                                     )
                                 },
-                                imagePager = provideImagePager()
+                                imagePager = provideImagePager(),
+                                onName = {},
+                                onLike = {},
+                                onDate = {},
+                                onContents = {},
+                                onPage = {},
+                                onComment = {}
                             ).invoke(reviewId.toInt(), 0)
                         }
                         Box(modifier = Modifier.size(600.dp)) {
@@ -104,7 +110,12 @@ class MainActivity : ComponentActivity() {
                                         modifier = Modifier.fillMaxSize()
                                     )
                                 },
-                                imagePager = provideImagePager()
+                                imagePager = provideImagePager(),
+                                onName = {},
+                                onLike = {},
+                                onDate = {},
+                                onContents = {},
+                                onComment = {}
                             ).invoke(reviewId.toInt())
                         }
                         LoginRepositoryTest(loginRepository = loginRepository)
@@ -167,6 +178,7 @@ fun ImagePagerWithContentsTest() {
                 model = url,
                 modifier = Modifier.fillMaxSize()
             )
-        }
+        },
+        onPage = {}
     )
 }

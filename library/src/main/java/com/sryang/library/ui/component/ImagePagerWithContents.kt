@@ -37,12 +37,12 @@ fun ImagePagerWithContents(
     name: String, // Torang
     contents: String, // contents,
     commentCount: String,//"762 comments"
-    onName: (() -> Unit)? = null,
-    onDate: (() -> Unit)? = null,
-    onContents: (() -> Unit)? = null,
-    onLike: (() -> Unit)? = null,
-    onComment: (() -> Unit)? = null,
-    onPage: ((Int) -> Unit)? = null,
+    onName: () -> Unit,
+    onDate: () -> Unit,
+    onContents: () -> Unit,
+    onLike: () -> Unit,
+    onComment: () -> Unit,
+    onPage: (Int) -> Unit,
     imagePager: @Composable (
         list: List<String>,
         position: Int?,
@@ -83,7 +83,7 @@ fun ImagePagerWithContents(
                         modifier = Modifier
                             .layoutId("name")
                             .clickable {
-                                onName?.invoke()
+                                onName.invoke()
                             },
                         text = name, color = Color.White, fontWeight = FontWeight.Bold
                     )
@@ -92,7 +92,7 @@ fun ImagePagerWithContents(
                         modifier = Modifier
                             .layoutId("contents")
                             .clickable {
-                                onContents?.invoke()
+                                onContents.invoke()
                             },
                         text = contents, color = Color.White, fontSize = 12.sp
                     )
@@ -101,7 +101,7 @@ fun ImagePagerWithContents(
                         modifier = Modifier
                             .layoutId("date")
                             .clickable {
-                                onDate?.invoke()
+                                onDate.invoke()
                             },
                         text = date, color = Color.LightGray, fontSize = 12.sp
                     )
@@ -114,7 +114,7 @@ fun ImagePagerWithContents(
                                 modifier = Modifier
                                     .size(15.dp)
                                     .clickable {
-                                        onLike?.invoke()
+                                        onLike.invoke()
                                     },
                                 painter = painterResource(id = R.drawable.heart_filled),
                                 contentDescription = "",
@@ -129,7 +129,7 @@ fun ImagePagerWithContents(
                             modifier = Modifier
                                 .align(Alignment.CenterEnd)
                                 .clickable {
-                                    onComment?.invoke()
+                                    onComment.invoke()
                                 }, fontSize = 12.sp
                         )
                     }
@@ -181,6 +181,7 @@ fun PreviewImagePagerWithContents() {
         onComment = {},
         imagePager = { _, _, _, _, _ ->
         },
-        image = {}
+        image = {},
+        onPage = {}
     )
 }

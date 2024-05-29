@@ -18,6 +18,11 @@ fun provideRestaurantImagePager(
         backgroundColor: Color?,
         image: @Composable (String) -> Unit,
     ) -> Unit,
+    onName: () -> Unit,
+    onDate: () -> Unit,
+    onContents: () -> Unit,
+    onLike: () -> Unit,
+    onComment: () -> Unit,
 ): @Composable (Int) -> Unit = { imageId ->
     val viewModel: RestaurantImagePagerViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsState()
@@ -38,7 +43,12 @@ fun provideRestaurantImagePager(
             imagePager = imagePager,
             image = image,
             position = uiState.position,
-            onPage = { viewModel.onPage(it) }
+            onPage = { viewModel.onPage(it) },
+            onComment = onComment,
+            onName = onName,
+            onLike = onLike,
+            onDate = onDate,
+            onContents = onContents
         )
     }
 }
