@@ -44,6 +44,6 @@ ext {
     reportVersion = 'bb52e7be2e'
     mediaContentResolverVersion = '54ff69ee3a'
     commentVersion = '180abb29cf'
-    commonImageLoaderVersion = '3172041579'
+    commonImageLoaderVersion = '9f561bef32'
     ImagePagerVersion = '366e0c4e85'
 }

@@ -96,7 +96,7 @@ dependencies {
 
     implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
 
-    implementation 'com.github.sarang628:CommonImageLoader:3172041579'
+    implementation "com.github.sarang628:CommonImageLoader:${commonImageLoaderVersion}"
     implementation 'com.github.sarang628:ImagePager:062f536bde'
     implementation 'com.github.sarang628:TorangRepository:e6b82fc2e5'
 }

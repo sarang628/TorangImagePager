@@ -19,11 +19,11 @@ fun provideReviewImagePager(
         backgroundColor: Color?,
         image: @Composable (String) -> Unit,
     ) -> Unit,
-    onName: () -> Unit,
+    onName: (Int) -> Unit,
     onDate: () -> Unit,
     onContents: () -> Unit,
-    onLike: () -> Unit,
-    onComment: () -> Unit,
+    onLike: (Int) -> Unit,
+    onComment: (Int) -> Unit,
     onPage: (Int) -> Unit,
 ): @Composable (Int, Int) -> Unit = { reviewId, position ->
     val viewModel: ImagePagerViewModel = hiltViewModel()
@@ -47,9 +47,9 @@ fun provideReviewImagePager(
             position = position,
             imagePager = imagePager,
             image = image,
-            onComment = onComment,
-            onName = onName,
-            onLike = onLike,
+            onComment = { onComment(uiState.reviewId) },
+            onName = { onName(uiState.userId) },
+            onLike = { onLike(uiState.reviewId          ) },
             onDate = onDate,
             onContents = onContents,
             onPage = onPage

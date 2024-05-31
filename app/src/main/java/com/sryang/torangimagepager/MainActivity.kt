@@ -46,7 +46,6 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var feedRepository: FeedRepository
 
-    @OptIn(ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -66,22 +65,14 @@ class MainActivity : ComponentActivity() {
                         InputChip(selected = true, onClick = { }, label = {
                             Text(text = "reviewId:")
                             BasicTextField(value = reviewId, onValueChange = {
-                                try {
-                                    reviewId = it
-                                } catch (e: Exception) {
-                                    Log.e("__MainActivity", "Wrong input : ${it}")
-                                }
+                                reviewId = it
                             })
                         })
 
                         InputChip(selected = true, onClick = { }, label = {
                             Text(text = "imageId:")
                             BasicTextField(value = imageId, onValueChange = {
-                                try {
-                                    imageId = it
-                                } catch (e: Exception) {
-                                    Log.e("__MainActivity", "Wrong input : ${it}")
-                                }
+                                imageId = it
                             })
                         })
 
@@ -100,7 +91,13 @@ class MainActivity : ComponentActivity() {
                                 onContents = {},
                                 onPage = {},
                                 onComment = {}
-                            ).invoke(reviewId.toInt(), 0)
+                            ).invoke(
+                                try {
+                                    reviewId.toInt()
+                                } catch (e: Exception) {
+                                    0
+                                }, 0
+                            )
                         }
                         Box(modifier = Modifier.size(600.dp)) {
                             provideRestaurantImagePager(
@@ -116,7 +113,13 @@ class MainActivity : ComponentActivity() {
                                 onDate = {},
                                 onContents = {},
                                 onComment = {}
-                            ).invoke(reviewId.toInt())
+                            ).invoke(
+                                try {
+                                    reviewId.toInt()
+                                } catch (e: Exception) {
+                                    0
+                                }
+                            )
                         }
                         LoginRepositoryTest(loginRepository = loginRepository)
                         FeedRepositoryTest(feedRepository = feedRepository)
@@ -176,7 +179,10 @@ fun ImagePagerWithContentsTest() {
         image = { url ->
             ZoomableTorangAsyncImage(
                 model = url,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
+                onSwipeDown = {
+                    Log.d("__MainActivity", "onSwipeDown")
+                }
             )
         },
         onPage = {}

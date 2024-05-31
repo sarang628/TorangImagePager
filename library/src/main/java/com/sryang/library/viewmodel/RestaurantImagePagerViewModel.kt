@@ -49,7 +49,10 @@ class RestaurantImagePagerViewModel @Inject constructor(
                 it.copy(contents = result.contents,
                     likeCount = result.likeCount,
                     commentCount = result.commentCount,
-                    name = result.name)
+                    name = result.name,
+                    reviewId = result.reviewId,
+                    userId = result.userId
+                    )
             }
             Log.d("__RestaurantImagePagerViewModel", "ReviewAndImageEntity: $result")
         }

@@ -166,7 +166,7 @@ fun imagePagerConstraintSet(): ConstraintSet {
 @Preview
 @Composable
 fun PreviewImagePagerWithContents() {
-    ImagePagerWithContents(
+    ImagePagerWithContents(/*Preview*/
         list = listOf(),
         position = 0,
         date = "MAY 10 AT 6:40 PM",
