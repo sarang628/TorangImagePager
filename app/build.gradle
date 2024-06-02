@@ -98,5 +98,5 @@ dependencies {
 
     implementation "com.github.sarang628:CommonImageLoader:${commonImageLoaderVersion}"
     implementation 'com.github.sarang628:ImagePager:062f536bde'
-    implementation 'com.github.sarang628:TorangRepository:e6b82fc2e5'
+    implementation "com.github.sarang628:TorangRepository:${torangRepositoryVersion}"
 }

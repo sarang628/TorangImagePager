@@ -46,15 +46,19 @@ class RestaurantImagePagerViewModel @Inject constructor(
         viewModelScope.launch {
             val result = getReviewUseCase.invoke(_uiState.value.list[position].reviewId)
             _uiState.update {
-                it.copy(contents = result.contents,
+                it.copy(
+                    contents = result.contents,
                     likeCount = result.likeCount,
                     commentCount = result.commentCount,
                     name = result.name,
                     reviewId = result.reviewId,
                     userId = result.userId
-                    )
+                )
             }
-            Log.d("__RestaurantImagePagerViewModel", "ReviewAndImageEntity: $result")
+            Log.d(
+                "__RestaurantImagePagerViewModel",
+                "onPage ${position} ReviewAndImageEntity: $result"
+            )
         }
     }
 }

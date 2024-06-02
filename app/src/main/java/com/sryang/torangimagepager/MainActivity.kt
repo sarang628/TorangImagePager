@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -50,7 +49,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             var reviewId by remember { mutableStateOf("0") }
-            var imageId by remember { mutableStateOf("0") }
+            var restaurantId by remember { mutableStateOf("0") }
             TorangImagePagerTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
@@ -70,9 +69,9 @@ class MainActivity : ComponentActivity() {
                         })
 
                         InputChip(selected = true, onClick = { }, label = {
-                            Text(text = "imageId:")
-                            BasicTextField(value = imageId, onValueChange = {
-                                imageId = it
+                            Text(text = "restaurantId:")
+                            BasicTextField(value = restaurantId, onValueChange = {
+                                restaurantId = it
                             })
                         })
 
@@ -85,7 +84,9 @@ class MainActivity : ComponentActivity() {
                                     )
                                 },
                                 imagePager = provideImagePager(),
-                                onName = {},
+                                onName = {
+                                    Log.d("__MainActivity", "onName userId: ${it}")
+                                },
                                 onLike = {},
                                 onDate = {},
                                 onContents = {},
@@ -108,14 +109,16 @@ class MainActivity : ComponentActivity() {
                                     )
                                 },
                                 imagePager = provideImagePager(),
-                                onName = {},
+                                onName = {
+                                    Log.d("__MainActivity", "onName userId: ${it}")
+                                },
                                 onLike = {},
                                 onDate = {},
                                 onContents = {},
                                 onComment = {}
                             ).invoke(
                                 try {
-                                    reviewId.toInt()
+                                    restaurantId.toInt()
                                 } catch (e: Exception) {
                                     0
                                 }
