@@ -81,6 +81,7 @@ dependencies {
     implementation "androidx.compose.material3:material3-window-size-class"
     implementation "androidx.lifecycle:lifecycle-runtime-compose:$lifecycle_version"
     implementation "androidx.navigation:navigation-compose"
+    implementation "androidx.compose.foundation:foundation:1.7.0-alpha08"
 
     /** Retrofit */
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
