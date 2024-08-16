@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
+import com.sryang.library.ExpandableText
 import com.sryang.library.R
 
 @Composable
@@ -88,13 +89,16 @@ fun ImagePagerWithContents(
                         text = name, color = Color.White, fontWeight = FontWeight.Bold
                     )
 
-                    Text(
+                    ExpandableText(
                         modifier = Modifier
                             .layoutId("contents")
                             .clickable {
                                 onContents.invoke()
                             },
-                        text = contents, color = Color.White, fontSize = 12.sp
+                        text = contents,
+                        onClickNickName = {},
+                        expandableTextColor = Color.White,
+                        //fontSize = 12.sp
                     )
 
                     Text(
