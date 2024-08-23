@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.sryang.library.ui.component.ImagePagerWithContents
@@ -24,6 +25,7 @@ fun provideRestaurantImagePager(
     onContents: () -> Unit,
     onLike: (Int) -> Unit,
     onComment: (Int) -> Unit,
+    expandableText: @Composable (modifier: Modifier, text: String, expandableTextColor: Color, onClickNickName: () -> Unit) -> Unit,
 ): @Composable (Int) -> Unit = { imageId ->
     val viewModel: RestaurantImagePagerViewModel = hiltViewModel()
     val uiState: RestaurantImagePagerUiState by viewModel.uiState.collectAsState()
@@ -49,7 +51,8 @@ fun provideRestaurantImagePager(
             onName = { onName(uiState.userId) },
             onLike = { onLike(uiState.reviewId) },
             onDate = onDate,
-            onContents = onContents
+            onContents = onContents,
+            expandableText = expandableText
         )
     }
 }

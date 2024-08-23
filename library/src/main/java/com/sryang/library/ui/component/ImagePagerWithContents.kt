@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
-import com.sryang.library.ExpandableText
 import com.sryang.library.R
 
 @Composable
@@ -52,6 +51,7 @@ fun ImagePagerWithContents(
         image: @Composable (String) -> Unit,
     ) -> Unit,
     image: @Composable (String) -> Unit,
+    expandableText: @Composable (modifier: Modifier, text: String, expandableTextColor: Color, onClickNickName: () -> Unit) -> Unit,
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -89,7 +89,7 @@ fun ImagePagerWithContents(
                         text = name, color = Color.White, fontWeight = FontWeight.Bold
                     )
 
-                    ExpandableText(
+                    expandableText.invoke(
                         modifier = Modifier
                             .layoutId("contents")
                             .clickable {
@@ -98,7 +98,6 @@ fun ImagePagerWithContents(
                         text = contents,
                         onClickNickName = {},
                         expandableTextColor = Color.White,
-                        //fontSize = 12.sp
                     )
 
                     Text(
@@ -186,6 +185,7 @@ fun PreviewImagePagerWithContents() {
         imagePager = { _, _, _, _, _ ->
         },
         image = {},
-        onPage = {}
+        onPage = {},
+        expandableText = { _, text, expandableTextColor, onClickNickName -> }
     )
 }

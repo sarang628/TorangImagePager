@@ -70,7 +70,6 @@ dependencies {
     implementation(libs.lifecycle.runtime.compose)
 
     implementation(libs.constraintlayout.compose)
-    implementation("com.github.sarang628:ExpandableText:58050c832e")
 }
 
 afterEvaluate {

@@ -128,4 +128,5 @@ dependencies {
     implementation(libs.imagePager)
     implementation(libs.torangRepository)
     implementation(project(":library"))
+    implementation("com.github.sarang628:ExpandableText:547e79fc42")
 }

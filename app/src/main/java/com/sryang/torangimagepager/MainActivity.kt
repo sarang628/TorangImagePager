@@ -29,6 +29,7 @@ import com.sarang.torang.repository.FeedRepositoryTest
 import com.sarang.torang.repository.LoginRepository
 import com.sarang.torang.repository.LoginRepositoryTest
 import com.sryang.imagepager.provideImagePager
+import com.sryang.library.ExpandableText
 import com.sryang.library.ui.component.ImagePagerWithContents
 import com.sryang.library.provideRestaurantImagePager
 import com.sryang.library.provideReviewImagePager
@@ -91,7 +92,15 @@ class MainActivity : ComponentActivity() {
                                 onDate = {},
                                 onContents = {},
                                 onPage = {},
-                                onComment = {}
+                                onComment = {},
+                                expandableText = { modifier, text, expandableTextColor, onClickNickName ->
+                                    ExpandableText(
+                                        modifier = modifier,
+                                        text = text,
+                                        onClickNickName = onClickNickName,
+                                        expandableTextColor = expandableTextColor
+                                    )
+                                }
                             ).invoke(
                                 try {
                                     reviewId.toInt()
@@ -115,7 +124,15 @@ class MainActivity : ComponentActivity() {
                                 onLike = {},
                                 onDate = {},
                                 onContents = {},
-                                onComment = {}
+                                onComment = {},
+                                expandableText = { modifier, text, expandableTextColor, onClickNickName ->
+                                    ExpandableText(
+                                        modifier = modifier,
+                                        text = text,
+                                        onClickNickName = onClickNickName,
+                                        expandableTextColor = expandableTextColor
+                                    )
+                                }
                             ).invoke(
                                 try {
                                     restaurantId.toInt()
@@ -188,6 +205,14 @@ fun ImagePagerWithContentsTest() {
                 }
             )
         },
-        onPage = {}
+        onPage = {},
+        expandableText = { modifier, text, expandableTextColor, onClickNickName ->
+            ExpandableText(
+                modifier = modifier,
+                text = text,
+                onClickNickName = onClickNickName,
+                expandableTextColor = expandableTextColor
+            )
+        }
     )
 }
