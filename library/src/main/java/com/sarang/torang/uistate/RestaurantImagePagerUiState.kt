@@ -1,6 +1,6 @@
-package com.sryang.library.uistate
+package com.sarang.torang.uistate
 
-import com.sryang.library.data.ReviewImageEntity
+import com.sarang.torang.data.data.ReviewImageEntity
 
 data class RestaurantImagePagerUiState(
     val list: List<ReviewImageEntity> = listOf(),

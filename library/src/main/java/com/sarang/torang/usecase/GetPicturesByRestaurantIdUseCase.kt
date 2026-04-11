@@ -1,6 +1,6 @@
-package com.sryang.library.usecase
+package com.sarang.torang.usecase
 
-import com.sryang.library.data.ReviewImageEntity
+import com.sarang.torang.data.data.ReviewImageEntity
 
 
 interface GetPicturesByRestaurantIdUseCase {

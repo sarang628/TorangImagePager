@@ -24,21 +24,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.sarang.torang.provideRestaurantImagePager
+import com.sarang.torang.provideReviewImagePager
 import com.sarang.torang.repository.LoginRepository
 import com.sarang.torang.repository.feed.FeedFlowRepository
 import com.sarang.torang.repository.feed.FeedLoadRepository
 import com.sarang.torang.repository.feed.FeedRepository
 import com.sarang.torang.repository.test.LoginRepositoryTest
 import com.sarang.torang.repository.test.feed.FeedRepositoryTest1
+import com.sarang.torang.ui.component.ImagePagerWithContents
+import com.sarang.torang.ui.theme.TorangImagePagerTheme
 import com.sryang.imagepager.provideImagePager
 import com.sryang.library.ExpandableText
-import com.sryang.library.ui.component.ImagePagerWithContents
-import com.sryang.library.provideRestaurantImagePager
-import com.sryang.library.provideReviewImagePager
-import com.sryang.torang.ui.theme.TorangImagePagerTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import kotlin.invoke
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -55,7 +54,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             var reviewId by remember { mutableStateOf("0") }
             var restaurantId by remember { mutableStateOf("0") }
-            _root_ide_package_.com.sarang.torang.ui.theme.TorangImagePagerTheme {
+            TorangImagePagerTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
                     Column(
@@ -81,7 +80,7 @@ class MainActivity : ComponentActivity() {
                         })
 
                         Box(modifier = Modifier.size(600.dp)) {
-                            _root_ide_package_.com.sarang.library.provideReviewImagePager(
+                            provideReviewImagePager(
                                 image = { url ->
                                     ZoomableTorangAsyncImage(
                                         model = url,
@@ -114,7 +113,7 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         Box(modifier = Modifier.size(600.dp)) {
-                            _root_ide_package_.com.sarang.library.provideRestaurantImagePager(
+                            provideRestaurantImagePager(
                                 image = { url ->
                                     ZoomableTorangAsyncImage(
                                         model = url,
@@ -169,7 +168,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    _root_ide_package_.com.sarang.torang.ui.theme.TorangImagePagerTheme {
+    TorangImagePagerTheme {
         Greeting("Android")
     }
 }

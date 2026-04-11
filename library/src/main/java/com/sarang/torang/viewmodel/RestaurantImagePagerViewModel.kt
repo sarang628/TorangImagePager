@@ -1,11 +1,11 @@
-package com.sryang.library.viewmodel
+package com.sarang.torang.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sryang.library.uistate.RestaurantImagePagerUiState
-import com.sryang.library.usecase.GetPicturesByRestaurantIdUseCase
-import com.sryang.library.usecase.GetReviewForRestaurantImagePagerUseCase
+import com.sarang.torang.uistate.RestaurantImagePagerUiState
+import com.sarang.torang.usecase.GetPicturesByRestaurantIdUseCase
+import com.sarang.torang.usecase.GetReviewForRestaurantImagePagerUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -10,7 +10,7 @@ plugins {
 
 android {
     compileSdk = rootProject.extra["compileSdk"] as Int
-    namespace = "com.sryang.library"
+    namespace = "com.sarang.torang"
     defaultConfig {
         minSdk = rootProject.extra["minSdk"] as Int
         targetSdk = rootProject.extra["targetSdk"] as Int

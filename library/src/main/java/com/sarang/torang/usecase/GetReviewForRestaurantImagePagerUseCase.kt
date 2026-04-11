@@ -1,6 +1,6 @@
-package com.sryang.library.usecase
+package com.sarang.torang.usecase
 
-import com.sryang.library.data.RestaurantImagePageContents
+import com.sarang.torang.data.data.RestaurantImagePageContents
 
 interface GetReviewForRestaurantImagePagerUseCase {
     suspend fun invoke(reviewId : Int) : RestaurantImagePageContents

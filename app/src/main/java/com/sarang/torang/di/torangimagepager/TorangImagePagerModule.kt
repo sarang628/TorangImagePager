@@ -1,14 +1,14 @@
 package com.sarang.torang.di.torangimagepager
 
-import com.sarang.torang.repository.FeedRepository
+import com.sarang.torang.BuildConfig
+import com.sarang.torang.data.data.RestaurantImagePageContents
+import com.sarang.torang.data.data.ReviewImageEntity
 import com.sarang.torang.repository.PicturesRepository
-import com.sryang.library.data.RestaurantImagePageContents
-import com.sryang.library.data.ReviewImageEntity
-import com.sryang.library.uistate.ImagePagerUiState
-import com.sryang.library.usecase.GetPicturesByRestaurantIdUseCase
-import com.sryang.library.usecase.GetReviewForRestaurantImagePagerUseCase
-import com.sryang.library.usecase.GetReviewForReviewImagePagerUseCase
-import com.sryang.torang.BuildConfig
+import com.sarang.torang.repository.feed.FeedRepository
+import com.sarang.torang.uistate.ImagePagerUiState
+import com.sarang.torang.usecase.GetPicturesByRestaurantIdUseCase
+import com.sarang.torang.usecase.GetReviewForRestaurantImagePagerUseCase
+import com.sarang.torang.usecase.GetReviewForReviewImagePagerUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,15 +21,15 @@ class TorangImagePagerModule {
     fun provideGetReviewUseCase(repository: FeedRepository): GetReviewForReviewImagePagerUseCase {
         return object : GetReviewForReviewImagePagerUseCase {
             override suspend fun invoke(reviewId: Int): ImagePagerUiState {
-                val it = repository.getFeedByReviewId(reviewId)
+                val it = repository.findById(reviewId)
                 return ImagePagerUiState(
                     list = it.images.map { BuildConfig.REVIEW_IMAGE_SERVER_URL + it.pictureUrl },
-                    name = it.review.userName,
-                    date = it.review.createDate,
+                    name = it.review.userName ?: "",
+                    date = it.review.createDate ?: "",
                     likeCount = it.review.likeAmount.toString(),
-                    contents = it.review.contents,
+                    contents = it.review.contents ?: "",
                     commentCount = "${it.review.commentAmount} comments",
-                    userId = it.review.userId,
+                    userId = it.review.userId ?: -1,
                     reviewId = it.review.reviewId
                 )
             }
@@ -40,14 +40,14 @@ class TorangImagePagerModule {
     fun provideGetReviewForRestaurantImagePagerUseCase(repository: FeedRepository): GetReviewForRestaurantImagePagerUseCase {
         return object : GetReviewForRestaurantImagePagerUseCase {
             override suspend fun invoke(reviewId: Int): RestaurantImagePageContents {
-                val it = repository.getFeedByReviewId(reviewId)
+                val it = repository.findById(reviewId)
                 return RestaurantImagePageContents(
-                    contents = it.review.contents,
+                    contents = it.review.contents ?: "",
                     likeCount = it.review.likeAmount.toString(),
-                    name = it.review.userName,
+                    name = it.review.userName ?: "",
                     commentCount = it.review.commentAmount.toString(),
                     reviewId = it.review.reviewId,
-                    userId = it.review.userId
+                    userId = it.review.userId ?: -1
                 )
             }
         }
@@ -62,12 +62,12 @@ class TorangImagePagerModule {
                     ReviewImageEntity(
                         pictureId = it.pictureId,
                         pictureUrl = BuildConfig.REVIEW_IMAGE_SERVER_URL + it.pictureUrl,
-                        restaurantId = it.restaurantId,
-                        reviewId = it.reviewId,
-                        userId = it.userId,
-                        createDate = it.createDate,
-                        menu = it.menu,
-                        menuId = it.menuId
+                        restaurantId = it.restaurantId ?: -1,
+                        reviewId = it.reviewId ?: -1,
+                        userId = it.userId ?: -1,
+                        createDate = it.createDate ?: "",
+                        menu = it.menu ?: -1,
+                        menuId = it.menuId ?: -1
                     )
                 }
             }

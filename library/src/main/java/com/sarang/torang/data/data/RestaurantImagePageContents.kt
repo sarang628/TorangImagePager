@@ -1,4 +1,4 @@
-package com.sryang.library.data
+package com.sarang.torang.data.data
 
 data class RestaurantImagePageContents(
     val contents: String = "",

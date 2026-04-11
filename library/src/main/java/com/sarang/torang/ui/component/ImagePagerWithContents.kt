@@ -1,4 +1,4 @@
-package com.sryang.library.ui.component
+package com.sarang.torang.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
-import com.sryang.library.R
+import com.sarang.torang.R
 
 @Composable
 fun ImagePagerWithContents(

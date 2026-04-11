@@ -1,4 +1,4 @@
-package com.sryang.library.uistate
+package com.sarang.torang.uistate
 
 data class ImagePagerUiState(
     val list: List<String> = listOf<String>(),

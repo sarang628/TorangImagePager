@@ -1,10 +1,10 @@
-package com.sryang.library.viewmodel
+package com.sarang.torang.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sryang.library.uistate.ImagePagerUiState
-import com.sryang.library.usecase.GetReviewForReviewImagePagerUseCase
+import com.sarang.torang.uistate.ImagePagerUiState
+import com.sarang.torang.usecase.GetReviewForReviewImagePagerUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

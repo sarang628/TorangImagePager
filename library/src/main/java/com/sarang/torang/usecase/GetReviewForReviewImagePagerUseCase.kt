@@ -1,6 +1,6 @@
-package com.sryang.library.usecase
+package com.sarang.torang.usecase
 
-import com.sryang.library.uistate.ImagePagerUiState
+import com.sarang.torang.uistate.ImagePagerUiState
 
 
 interface GetReviewForReviewImagePagerUseCase {
