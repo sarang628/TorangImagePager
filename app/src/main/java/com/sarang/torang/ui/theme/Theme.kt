@@ -1,6 +1,5 @@
-package com.sryang.torangimagepager.ui.theme
+package com.sarang.torang.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

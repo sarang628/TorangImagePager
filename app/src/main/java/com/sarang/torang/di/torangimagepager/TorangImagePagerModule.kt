@@ -1,4 +1,4 @@
-package com.sryang.torangimagepager.di.torangimagepager
+package com.sarang.torang.di.torangimagepager
 
 import com.sarang.torang.repository.FeedRepository
 import com.sarang.torang.repository.PicturesRepository
@@ -8,7 +8,7 @@ import com.sryang.library.uistate.ImagePagerUiState
 import com.sryang.library.usecase.GetPicturesByRestaurantIdUseCase
 import com.sryang.library.usecase.GetReviewForRestaurantImagePagerUseCase
 import com.sryang.library.usecase.GetReviewForReviewImagePagerUseCase
-import com.sryang.torangimagepager.BuildConfig
+import com.sryang.torang.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

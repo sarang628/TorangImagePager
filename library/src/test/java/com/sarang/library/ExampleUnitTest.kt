@@ -1,4 +1,4 @@
-package com.sryang.library
+package com.sarang.library
 
 import org.junit.Test
 

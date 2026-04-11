@@ -1,4 +1,4 @@
-package com.sryang.torangimagepager
+package com.sarang
 
 import ZoomableTorangAsyncImage
 import android.os.Bundle
@@ -24,18 +24,21 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.sarang.torang.repository.FeedRepository
-import com.sarang.torang.repository.FeedRepositoryTest
 import com.sarang.torang.repository.LoginRepository
-import com.sarang.torang.repository.LoginRepositoryTest
+import com.sarang.torang.repository.feed.FeedFlowRepository
+import com.sarang.torang.repository.feed.FeedLoadRepository
+import com.sarang.torang.repository.feed.FeedRepository
+import com.sarang.torang.repository.test.LoginRepositoryTest
+import com.sarang.torang.repository.test.feed.FeedRepositoryTest1
 import com.sryang.imagepager.provideImagePager
 import com.sryang.library.ExpandableText
 import com.sryang.library.ui.component.ImagePagerWithContents
 import com.sryang.library.provideRestaurantImagePager
 import com.sryang.library.provideReviewImagePager
-import com.sryang.torangimagepager.ui.theme.TorangImagePagerTheme
+import com.sryang.torang.ui.theme.TorangImagePagerTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import kotlin.invoke
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -43,15 +46,16 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var loginRepository: LoginRepository
 
-    @Inject
-    lateinit var feedRepository: FeedRepository
+    @Inject lateinit var feedRepository: FeedRepository
+    @Inject lateinit var feedLoadRepository: FeedLoadRepository
+    @Inject lateinit var feedFlowRepository: FeedFlowRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             var reviewId by remember { mutableStateOf("0") }
             var restaurantId by remember { mutableStateOf("0") }
-            TorangImagePagerTheme {
+            _root_ide_package_.com.sarang.torang.ui.theme.TorangImagePagerTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
                     Column(
@@ -77,7 +81,7 @@ class MainActivity : ComponentActivity() {
                         })
 
                         Box(modifier = Modifier.size(600.dp)) {
-                            provideReviewImagePager(
+                            _root_ide_package_.com.sarang.library.provideReviewImagePager(
                                 image = { url ->
                                     ZoomableTorangAsyncImage(
                                         model = url,
@@ -110,7 +114,7 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         Box(modifier = Modifier.size(600.dp)) {
-                            provideRestaurantImagePager(
+                            _root_ide_package_.com.sarang.library.provideRestaurantImagePager(
                                 image = { url ->
                                     ZoomableTorangAsyncImage(
                                         model = url,
@@ -142,7 +146,11 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         LoginRepositoryTest(loginRepository = loginRepository)
-                        FeedRepositoryTest(feedRepository = feedRepository)
+                        FeedRepositoryTest1(
+                            feedRepository = feedRepository,
+                            feedLoadRepository = feedLoadRepository,
+                            feedFlowRepository = feedFlowRepository
+                        )
                     }
                 }
             }
@@ -161,7 +169,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    TorangImagePagerTheme {
+    _root_ide_package_.com.sarang.torang.ui.theme.TorangImagePagerTheme {
         Greeting("Android")
     }
 }

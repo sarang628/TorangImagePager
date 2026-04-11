@@ -1,6 +1,5 @@
-package com.sryang.library
+package com.sarang.library
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -9,9 +8,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.sryang.library.ui.component.ImagePagerWithContents
-import com.sryang.library.viewmodel.ImagePagerViewModel
+import com.sryang.library.uistate.RestaurantImagePagerUiState
+import com.sryang.library.viewmodel.RestaurantImagePagerViewModel
 
-fun provideReviewImagePager(
+fun provideRestaurantImagePager(
     image: @Composable (String) -> Unit,
     imagePager: @Composable (
         list: List<String>,
@@ -25,36 +25,33 @@ fun provideReviewImagePager(
     onContents: () -> Unit,
     onLike: (Int) -> Unit,
     onComment: (Int) -> Unit,
-    onPage: (Int) -> Unit,
     expandableText: @Composable (modifier: Modifier, text: String, expandableTextColor: Color, onClickNickName: () -> Unit) -> Unit,
-): @Composable (Int, Int) -> Unit = { reviewId, position ->
-    val viewModel: ImagePagerViewModel = hiltViewModel()
-    val uiState by viewModel.uiState.collectAsState()
-    LaunchedEffect(key1 = reviewId) {
-        viewModel.load(reviewId)
+): @Composable (Int) -> Unit = { imageId ->
+    val viewModel: RestaurantImagePagerViewModel = hiltViewModel()
+    val uiState: RestaurantImagePagerUiState by viewModel.uiState.collectAsState()
+    LaunchedEffect(key1 = imageId) {
+        viewModel.load(imageId)
     }
-
-    Log.d("__ImagePager", "ProvideImagePager: $uiState, position : $position")
 
     if (uiState.list.isEmpty()) {
 
     } else {
         ImagePagerWithContents(
-            list = uiState.list,
-            date = uiState.date,
+            list = uiState.list.map { it.pictureUrl },
+            date = uiState.contents,
             likeCount = uiState.likeCount,
             name = uiState.name,
             contents = uiState.contents,
             commentCount = uiState.commentCount,
-            position = position,
             imagePager = imagePager,
             image = image,
+            position = uiState.position,
+            onPage = { viewModel.onPage(it) },
             onComment = { onComment(uiState.reviewId) },
             onName = { onName(uiState.userId) },
             onLike = { onLike(uiState.reviewId) },
             onDate = onDate,
             onContents = onContents,
-            onPage = onPage,
             expandableText = expandableText
         )
     }

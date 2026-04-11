@@ -8,7 +8,7 @@ plugins {
 
 android {
     compileSdk = rootProject.extra["compileSdk"] as Int
-    namespace = "com.sryang.torangimagepager"
+    namespace = "com.sarang.torang"
     defaultConfig {
         minSdk = rootProject.extra["minSdk"] as Int
         targetSdk = rootProject.extra["targetSdk"] as Int
@@ -45,7 +45,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.6"
+        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtension.get()
     }
 
     compileOptions {
@@ -127,6 +127,8 @@ dependencies {
     implementation(libs.commonImageLoader)
     implementation(libs.imagePager)
     implementation(libs.torangRepository)
+    implementation(libs.torangdatabase)
+    implementation(libs.torangnetwork)
     implementation(project(":library"))
     implementation("com.github.sarang628:ExpandableText:547e79fc42")
 }

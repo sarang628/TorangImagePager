@@ -1,4 +1,4 @@
-package com.sryang.torangimagepager
+package com.sarang.torang
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
