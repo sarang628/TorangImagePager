@@ -1,30 +1,21 @@
 package com.sarang.torang
 
 import ZoomableTorangAsyncImage
-import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.sryang.imagepager.provideImagePager
 import com.sryang.library.ExpandableText
 
 @Composable
-fun Test2(restaurantId : String){
-    Box(modifier = Modifier.size(600.dp)) {
+fun PicturesByImageId(imageId : String){
+    Box(modifier = Modifier.fillMaxSize()) {
         provideRestaurantImagePager(
-            image = { url ->
-                ZoomableTorangAsyncImage(
-                    model = url,
-                    modifier = Modifier.fillMaxSize()
-                )
-            },
+            image = { url -> ZoomableTorangAsyncImage(model = url,
+                                                      modifier = Modifier.fillMaxSize()) },
             imagePager = provideImagePager(),
-            onName = {
-                Log.d("__MainActivity", "onName userId: ${it}")
-            },
+            onName = {},
             onLike = {},
             onDate = {},
             onContents = {},
@@ -37,12 +28,6 @@ fun Test2(restaurantId : String){
                     expandableTextColor = expandableTextColor
                 )
             }
-        ).invoke(
-            try {
-                restaurantId.toInt()
-            } catch (e: Exception) {
-                0
-            }
-        )
+        ).invoke(try { imageId.toInt() } catch (e: Exception) { 0 })
     }
 }

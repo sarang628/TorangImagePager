@@ -1,6 +1,5 @@
 package com.sarang.torang.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sarang.torang.uistate.RestaurantImagePagerUiState
@@ -21,44 +20,27 @@ class RestaurantImagePagerViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(RestaurantImagePagerUiState())
     val uiState: StateFlow<RestaurantImagePagerUiState> = _uiState
     fun load(imageId: Int) {
-        Log.d("__RestaurantImagePagerViewModel", "load imageId: $imageId")
         viewModelScope.launch {
             val list = getPicturesUseCase.invoke(imageId)
-            var position = 0
-            list.find { it.pictureId == imageId }?.let {
-                position = list.indexOf(it)
-            }
-            _uiState.update {
-                it.copy(
-                    list = list,
-                    position = position
-                )
+            val index = list.map { it.pictureId }
+                            .indexOfFirst { it == imageId }
+            _uiState.update { it.copy(list      = list,
+                                      position  = 0.coerceAtLeast(index))
             }
         }
     }
 
     fun onPage(position: Int) {
-        Log.d(
-            "__RestaurantImagePagerViewModel",
-            "onPage: $position ReviewImageEntity : ${_uiState.value.list[position]}"
-        )
-
         viewModelScope.launch {
             val result = getReviewUseCase.invoke(_uiState.value.list[position].reviewId)
             _uiState.update {
-                it.copy(
-                    contents = result.contents,
-                    likeCount = result.likeCount,
-                    commentCount = result.commentCount,
-                    name = result.name,
-                    reviewId = result.reviewId,
-                    userId = result.userId
-                )
+                it.copy(contents     = result.contents,
+                        likeCount    = result.likeCount,
+                        commentCount = result.commentCount,
+                        name         = result.name,
+                        reviewId     = result.reviewId,
+                        userId       = result.userId)
             }
-            Log.d(
-                "__RestaurantImagePagerViewModel",
-                "onPage ${position} ReviewAndImageEntity: $result"
-            )
         }
     }
 }

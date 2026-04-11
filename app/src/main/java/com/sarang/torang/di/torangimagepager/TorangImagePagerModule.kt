@@ -56,9 +56,8 @@ class TorangImagePagerModule {
     @Provides
     fun provideGetPicturesByRestaurantIdUseCase(repository: PicturesRepository): GetPicturesByRestaurantIdUseCase {
         return object : GetPicturesByRestaurantIdUseCase {
-            override suspend fun invoke(restaurantId: Int): List<ReviewImageEntity> {
-
-                return repository.getImagesByRestaurantId(restaurantId).map {
+            override suspend fun invoke(imageId: Int): List<ReviewImageEntity> {
+                return repository.getFeedPicture(imageId).map {
                     ReviewImageEntity(
                         pictureId = it.pictureId,
                         pictureUrl = BuildConfig.REVIEW_IMAGE_SERVER_URL + it.pictureUrl,

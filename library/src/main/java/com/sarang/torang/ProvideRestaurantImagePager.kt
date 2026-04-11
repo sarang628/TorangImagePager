@@ -13,13 +13,11 @@ import com.sarang.torang.viewmodel.RestaurantImagePagerViewModel
 
 fun provideRestaurantImagePager(
     image: @Composable (String) -> Unit,
-    imagePager: @Composable (
-        list: List<String>,
-        position: Int?,
-        onPage: ((Int) -> Unit)?,
-        backgroundColor: Color?,
-        image: @Composable (String) -> Unit,
-    ) -> Unit,
+    imagePager: @Composable (list: List<String>,
+                             position: Int?,
+                             onPage: ((Int) -> Unit)?,
+                             backgroundColor: Color?,
+                             image: @Composable (String) -> Unit, ) -> Unit,
     onName: (Int) -> Unit,
     onDate: () -> Unit,
     onContents: () -> Unit,
@@ -29,13 +27,12 @@ fun provideRestaurantImagePager(
 ): @Composable (Int) -> Unit = { imageId ->
     val viewModel: RestaurantImagePagerViewModel = hiltViewModel()
     val uiState: RestaurantImagePagerUiState by viewModel.uiState.collectAsState()
+
     LaunchedEffect(key1 = imageId) {
         viewModel.load(imageId)
     }
 
-    if (uiState.list.isEmpty()) {
-
-    } else {
+    if (uiState.list.isNotEmpty()) {
         ImagePagerWithContents(
             list = uiState.list.map { it.pictureUrl },
             date = uiState.contents,

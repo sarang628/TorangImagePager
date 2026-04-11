@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -17,8 +16,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.sarang.torang.data.RestaurantWithFiveImages
 import com.sarang.torang.data.ReviewAndImage
 import com.sarang.torang.repository.LoginRepository
 import com.sarang.torang.repository.feed.FeedFlowRepository
@@ -31,9 +28,7 @@ import com.sarang.torang.ui.theme.TorangImagePagerTheme
 import com.sryang.imagepager.provideImagePager
 import com.sryang.library.ExpandableText
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
-import kotlin.collections.emptyList
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -50,6 +45,10 @@ class MainActivity : ComponentActivity() {
             var list : List<ReviewAndImage>? by remember { mutableStateOf(null) }
 
             LaunchedEffect(Unit) {
+                feedLoadRepository.setLoadTrigger(true)
+            }
+
+            LaunchedEffect(Unit) {
                 feedLoadRepository.feeds.collect {
                     list = it
                 }
@@ -58,13 +57,13 @@ class MainActivity : ComponentActivity() {
             val contents : @Composable ()->Unit = {
                 Menu(
                     a = {
-                        TestContainer(list) { reviewId, restaurantId ->
-                            Test(reviewId)
+                        TestContainer(list) { reviewId, imageId ->
+                            PicturesByReviewId(reviewId)
                         }
                     },
                     restaurantId = {
-                        TestContainer(list) { reviewId, restaurantId ->
-                            Test2(restaurantId)
+                        TestContainer(list) { reviewId, imageId ->
+                            PicturesByImageId(imageId)
                         }
                     },
                     imagePagerWithContentsTest = {
